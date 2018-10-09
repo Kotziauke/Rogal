@@ -11,47 +11,37 @@ void Map::add_area(Area* area)
 
 void Map::add_coin(unsigned int x, unsigned int y)
 {
-	bool exists = false;
-	for(auto &coin : coins)
+	coins.push_back({ x, y });
+}
+
+bool Map::is_walkable(unsigned int tx, unsigned int ty)
+{
+	for(auto &area : areas)
 	{
-		if(coin.x == x && coin.y == y)
+		if(area->is_walkable(tx, ty))
 		{
-			exists = true;
-			throw "A coin already exists at this place!\n";
-			break;
+			return true;
 		}
 	}
-	if(!exists)
+	return false;
+}
+
+bool Map::collect_coin(unsigned int tx, unsigned int ty)
+{
+	for(unsigned int i = 0; i < coins.size(); i++)
 	{
-		coins.push_back({ x, y });
+		if(coins[i].is_this_you(tx, ty))
+		{
+			coins.erase(coins.begin() + i);
+			return true;
+		}
 	}
+	return false;
 }
 
 int Map::remaining_coins()
 {
 	return coins.size();
-}
-
-void Map::move_player(Player& player, int sx, int sy)
-{
-	for(auto &area : areas)
-	{
-		if(player.x + sx >= area->x && player.x + sx < area->x + area->w && player.y + sy >= area->y && player.y + sy < area->y + area->h)
-		{
-			player.x += sx;
-			player.y += sy;
-			break;
-		}
-	}
-	for(unsigned int i = 0; i < coins.size(); i++)
-	{
-		if(player.x == coins[i].x && player.y == coins[i].y)
-		{
-			player.amount++;
-			coins.erase(coins.begin() + i);
-			break;
-		}
-	}
 }
 
 void Map::display()

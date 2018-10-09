@@ -1,7 +1,6 @@
 #pragma once
 #include "Area.h"
 #include "Coin.h"
-#include "Player.h"
 #include <vector>
 
 class Map
@@ -13,8 +12,9 @@ public:
 	Map();
 	void add_area(Area* area);
 	void add_coin(unsigned int x, unsigned int y);
+	bool is_walkable(unsigned int tx, unsigned int ty);
+	bool collect_coin(unsigned int tx, unsigned int ty);
 	int remaining_coins();
-	void move_player(Player& player, int sx, int sy);
 	void display();
 	~Map();
 };

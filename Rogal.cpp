@@ -95,16 +95,16 @@ int main()
 			switch(getch())
 			{
 			case 'a':
-				map->move_player(player, -1, 0);
+				player.walk(*map, -1, 0);
 				break;
 			case 's':
-				map->move_player(player, 0, 1);
+				player.walk(*map, 0, 1);
 				break;
 			case 'w':
-				map->move_player(player, 0, -1);
+				player.walk(*map, 0, -1);
 				break;
 			case 'd':
-				map->move_player(player, 1, 0);
+				player.walk(*map, 1, 0);
 				break;
 			case 'q':
 				loop = false;
