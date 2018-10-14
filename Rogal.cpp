@@ -8,8 +8,6 @@
 #include <ncurses.h>
 #include <iostream>
 #include "Area.h"
-#include "Room.h"
-#include "Corridor.h"
 #include "Coin.h"
 #include "Map.h"
 #include "Player.h"

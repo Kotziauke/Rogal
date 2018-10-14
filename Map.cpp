@@ -11,8 +11,8 @@ Map::Map(const char* path)
 	}
 	else
 	{
-		//kod
-		//jak sie spierdoli tutaj to wywolaj destruktor
+		bool start_set = false;
+		
 		file.close();
 	}
 }
