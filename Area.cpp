@@ -6,6 +6,10 @@ Area::Area(unsigned int x, unsigned int y, unsigned int w, unsigned int h) :
 	w { w },
 	h { h }
 {
+	if(w < 1 || h < 1)
+	{
+		throw(ExceptionWrongDimensions{ w, h });
+	}
 }
 
 bool Area::is_walkable(unsigned int tx, unsigned int ty)

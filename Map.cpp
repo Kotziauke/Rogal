@@ -1,7 +1,20 @@
 #include "Map.h"
 
-Map::Map()
+Map::Map(const char* path)
 {
+	std::ifstream file;
+	file.open(path, std::ifstream::binary | std::ifstream::in);
+	if(file.fail())
+	{
+		file.close();
+		throw(ExceptionBadFile{});
+	}
+	else
+	{
+		//kod
+		//jak sie spierdoli tutaj to wywolaj destruktor
+		file.close();
+	}
 }
 
 void Map::add_area(Area* area)
@@ -11,7 +24,23 @@ void Map::add_area(Area* area)
 
 void Map::add_coin(unsigned int x, unsigned int y)
 {
+	if(!is_walkable(x, y))
+	{
+		throw(ExceptionInaccessibleCoin{ x, y });
+	}
+	for(unsigned int i = 0; i < coins.size(); i++)
+	{
+		if(coins[i].is_this_you(x, y))
+		{
+			throw(ExceptionDuplicateCoin{ x, y });
+		}
+	}
 	coins.push_back({ x, y });
+}
+
+std::pair<unsigned int, unsigned int> Map::get_start_point()
+{
+	return start_point;
 }
 
 bool Map::is_walkable(unsigned int tx, unsigned int ty)

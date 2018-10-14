@@ -1,10 +1,10 @@
 #pragma once
 #include <ncurses.h>
+#include "Exceptions.h"
 
 class Area
 {
 protected:
-	//zrobic gettery
 	const unsigned int x;
 	const unsigned int y;
 	const unsigned int w;
