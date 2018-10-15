@@ -2,12 +2,12 @@
 	Maciej Gabryś
 	gm41357, gr. 211a
 	
-	9.10.2018
+	15.10.2018
 */
 
 #include <ncurses.h>
 #include <iostream>
-#include <vector>
+#include <string>
 #include "Area.h"
 #include "Coin.h"
 #include "Map.h"
@@ -21,28 +21,29 @@ int main()
 {
 	init();
 	Player player;
-	std::vector<Map*> maps;
-	try
-	{
-		maps.push_back(new Map{ "1.map" });
-		maps.push_back(new Map{ "2.map" });
-		maps.push_back(new Map{ "3.map" });
-	}
-	catch(Exception& e)
-	{
-		for(auto& map : maps)
-		{
-			delete map;
-		}
-		maps.clear();
-		quit();
-		std::cout << e.what();
-		return -1;
-	}
-	
+	Map* map = nullptr;
+	std::string path;
 	unsigned int n = 1;
-	for(auto& map : maps)
+	while(true)
 	{
+		path = std::to_string(n);
+		path += ".map";
+		try
+		{
+			map = new Map{ path.c_str() };
+		}
+		catch(ExceptionBadFile& e)
+		{
+			quit();
+			std::cout << "No more levels!" << std::endl;
+			return 0;
+		}
+		catch(Exception& e)
+		{
+			quit();
+			std::cout << "Error while processing level \"" << path.c_str() << "\":" << std::endl << ">" << e.what();
+			return -1;
+		}
 		player.teleport(map);
 		while(map->remaining_coins() > 0)
 		{
@@ -66,22 +67,14 @@ int main()
 				player.walk(map, 1, 0);
 				break;
 			case 'q':
-				for(auto& map : maps)
-				{
-					delete map;
-				}
-				maps.clear();
+				delete map;
 				quit();
 				return 0;
 			}
 		}
+		delete map;
 		n++;
 	}
-	for(auto& map : maps)
-	{
-		delete map;
-	}
-	maps.clear();
 	quit();
 	return 0;
 }
