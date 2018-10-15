@@ -33,9 +33,9 @@ ExceptionStartPointInVoid::ExceptionStartPointInVoid()
 ExceptionWrongDimensions::ExceptionWrongDimensions(unsigned int w, unsigned int h)
 {
 	err_msg = "Area of dimensions ";
-	err_msg += w;
-		err_msg += "x";
-	err_msg += h;
+	err_msg += std::to_string((int)w);
+	err_msg += "x";
+	err_msg += std::to_string((int)h);
 	err_msg += " cannot be created.\n";
 }
 
@@ -47,18 +47,18 @@ ExceptionNoCoins::ExceptionNoCoins()
 ExceptionInaccessibleCoin::ExceptionInaccessibleCoin(unsigned int x, unsigned int y)
 {
 	err_msg = "Cannot place a coin at position ";
-	err_msg += x;
+	err_msg += std::to_string((int)x);
 	err_msg += "x";
-	err_msg += y;
+	err_msg += std::to_string((int)y);
 	err_msg += ".\n";
 }
 
 ExceptionDuplicateCoin::ExceptionDuplicateCoin(unsigned int x, unsigned int y)
 {
 	err_msg = "Coin at position ";
-	err_msg += x;
+	err_msg += std::to_string((int)x);
 	err_msg += "x";
-	err_msg += y;
+	err_msg += std::to_string((int)y);
 	err_msg += " already exists on the map.\n";
 }
 
