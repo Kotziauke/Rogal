@@ -11,8 +11,110 @@ Map::Map(const char* path)
 	}
 	else
 	{
+		int x;
+		int y;
+		int w;
+		int h;
 		bool start_set = false;
-		
+		int ch;
+		while((ch = file.get()) != -1)
+		{
+			switch(ch)
+			{
+			case 'R':
+				x = file.get();
+				y = file.get();
+				w = file.get();
+				h = file.get();
+				if(x == -1 || y == -1 || w == -1 || h == -1)
+				{
+					destroy_areas();
+					throw(ExceptionEndOfFile{});
+				}
+				try
+				{
+					add_area(new Room{ (unsigned int)x, (unsigned int)y, (unsigned int)w, (unsigned int)h });
+				}
+				catch(Exception& e)
+				{
+					destroy_areas();
+					throw(e);
+				}
+				break;
+			case 'H':
+				x = file.get();
+				y = file.get();
+				w = file.get();
+				h = file.get();
+				if(x == -1 || y == -1 || w == -1 || h == -1)
+				{
+					destroy_areas();
+					throw(ExceptionEndOfFile{});
+				}
+				try
+				{
+					add_area(new Hallway{ (unsigned int)x, (unsigned int)y, (unsigned int)w, (unsigned int)h });
+				}
+				catch(Exception& e)
+				{
+					destroy_areas();
+					throw(e);
+				}
+				break;
+			case 'C':
+				x = file.get();
+				y = file.get();
+				if(x == -1 || y == -1)
+				{
+					destroy_areas();
+					throw(ExceptionEndOfFile{});
+				}
+				try
+				{
+					add_coin((unsigned int)x, (unsigned int)y);
+				}
+				catch(Exception& e)
+				{
+					destroy_areas();
+					throw(e);
+				}
+				break;
+			case 'S':
+				x = file.get();
+				y = file.get();
+				if(x == -1 || y == -1)
+				{
+					destroy_areas();
+					throw(ExceptionEndOfFile{});
+				}
+				try
+				{
+					start_point.first = (unsigned int)x;
+					start_point.second = (unsigned int)y;
+					start_set = true;
+				}
+				catch(Exception& e)
+				{
+					destroy_areas();
+					throw(e);
+				}
+				break;
+			default:
+				destroy_areas();
+				throw(ExceptionUnknownCharacter{});
+				break;
+			}
+		}
+		if(!start_set)
+		{
+			destroy_areas();
+			throw(ExceptionNoStartPoint{});
+		}
+		if(!is_walkable(start_point.first, start_point.second))
+		{
+			destroy_areas();
+			throw(ExceptionStartPointInVoid{});
+		}
 		file.close();
 	}
 }
@@ -20,6 +122,15 @@ Map::Map(const char* path)
 void Map::add_area(Area* area)
 {
 	areas.push_back(area);
+}
+
+void Map::destroy_areas()
+{
+	for(auto& area : areas)
+	{
+		delete area;
+	}
+	areas.clear();
 }
 
 void Map::add_coin(unsigned int x, unsigned int y)
@@ -45,7 +156,7 @@ std::pair<unsigned int, unsigned int> Map::get_start_point()
 
 bool Map::is_walkable(unsigned int tx, unsigned int ty)
 {
-	for(auto &area : areas)
+	for(auto& area : areas)
 	{
 		if(area->is_walkable(tx, ty))
 		{
@@ -75,11 +186,11 @@ int Map::remaining_coins()
 
 void Map::display()
 {
-	for(auto &area : areas)
+	for(auto& area : areas)
 	{
 		area->display();
 	}
-	for(auto &coin : coins)
+	for(auto& coin : coins)
 	{
 		coin.display();
 	}
@@ -87,9 +198,6 @@ void Map::display()
 
 Map::~Map()
 {
-	for(auto &area : areas)
-	{
-		delete area;
-	}
+	destroy_areas();
 }
 

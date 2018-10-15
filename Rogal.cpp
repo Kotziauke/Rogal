@@ -7,6 +7,7 @@
 
 #include <ncurses.h>
 #include <iostream>
+#include <vector>
 #include "Area.h"
 #include "Coin.h"
 #include "Map.h"
@@ -18,41 +19,37 @@ void quit();
 
 int main()
 {
-	Map* map = nullptr;
-	
+	init();
+	Player player;
+	std::vector<Map*> maps;
 	try
 	{
-		Map lv1{ "a.txt" };
-		map = &lv1;
+		maps.push_back(new Map{ "1.map" });
+		maps.push_back(new Map{ "2.map" });
+		maps.push_back(new Map{ "3.map" });
 	}
 	catch(Exception& e)
 	{
-		std::cout << "Error while loading a map from xxx file:" << std::endl;
+		for(auto& map : maps)
+		{
+			delete map;
+		}
+		maps.clear();
+		quit();
 		std::cout << e.what();
 		return -1;
 	}
-	catch(...)
-	{
-		std::cout << "???" << std::endl;
-		return -2;
-	}
 	
-	std::cout << "Poprawnie." << std::endl;
-	return 0;
-	
-	init();
-	Player player;
-	
-	for(int n = 0; n < 1; n++)
+	unsigned int n = 1;
+	for(auto& map : maps)
 	{
 		player.teleport(map);
-		bool loop = true;
-		while(loop)
+		while(map->remaining_coins() > 0)
 		{
 			erase();
 			map->display();
 			move(0, 0);
-			printw("Level %d, coins=%d, left=%d", n + 1, player.get_amount(), map->remaining_coins());
+			printw("Level %d, coins=%d, left=%d", n, player.get_amount(), map->remaining_coins());
 			player.display();
 			switch(getch())
 			{
@@ -69,15 +66,22 @@ int main()
 				player.walk(map, 1, 0);
 				break;
 			case 'q':
-				loop = false;
-				break;
-			}
-			if(map->remaining_coins() == 0)
-			{
-				loop = false;
+				for(auto& map : maps)
+				{
+					delete map;
+				}
+				maps.clear();
+				quit();
+				return 0;
 			}
 		}
+		n++;
 	}
+	for(auto& map : maps)
+	{
+		delete map;
+	}
+	maps.clear();
 	quit();
 	return 0;
 }

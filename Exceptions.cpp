@@ -15,6 +15,11 @@ ExceptionEndOfFile::ExceptionEndOfFile()
 	err_msg = "Unexpected end of file.\n";
 }
 
+ExceptionUnknownCharacter::ExceptionUnknownCharacter()
+{
+	err_msg = "Unknown character.\n";
+}
+
 ExceptionNoStartPoint::ExceptionNoStartPoint()
 {
 	err_msg = "Start point was not set.\n";

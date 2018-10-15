@@ -1,5 +1,7 @@
 #pragma once
 #include "Area.h"
+#include "Room.h"
+#include "Hallway.h"
 #include "Coin.h"
 #include <vector>
 #include <string>
@@ -15,6 +17,7 @@ private:
 	std::vector<Area*> areas;
 	std::vector<Coin> coins;
 	void add_area(Area* area);
+	void destroy_areas();
 	void add_coin(unsigned int x, unsigned int y);
 public:
 	Map(const char* path);

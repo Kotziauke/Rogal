@@ -25,6 +25,13 @@ public:
 	ExceptionEndOfFile();
 };
 
+class ExceptionUnknownCharacter :
+	public Exception
+{
+public:
+	ExceptionUnknownCharacter();
+};
+
 class ExceptionNoStartPoint :
 	public Exception
 {
