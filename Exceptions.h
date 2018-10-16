@@ -39,6 +39,13 @@ public:
 	ExceptionNoStartPoint();
 };
 
+class ExceptionDuplicateStartPoint :
+	public Exception
+{
+public:
+	ExceptionDuplicateStartPoint();
+};
+
 class ExceptionStartPointInVoid :
 	public Exception
 {

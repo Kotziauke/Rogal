@@ -25,6 +25,11 @@ ExceptionNoStartPoint::ExceptionNoStartPoint()
 	err_msg = "Start point was not set.\n";
 }
 
+ExceptionDuplicateStartPoint::ExceptionDuplicateStartPoint()
+{
+	err_msg = "Start point was already set in this map.\n";
+}
+
 ExceptionStartPointInVoid::ExceptionStartPointInVoid()
 {
 	err_msg = "Start point is outside a walkable area.\n";

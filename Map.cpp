@@ -80,6 +80,11 @@ Map::Map(const char* path)
 				}
 				break;
 			case 'S':
+				if(start_set)
+				{
+					destroy_areas();
+					throw(ExceptionDuplicateStartPoint{});
+				}
 				x = file.get();
 				y = file.get();
 				if(x == -1 || y == -1)
@@ -87,17 +92,9 @@ Map::Map(const char* path)
 					destroy_areas();
 					throw(ExceptionEndOfFile{});
 				}
-				try
-				{
-					start_point.first = (unsigned int)x;
-					start_point.second = (unsigned int)y;
-					start_set = true;
-				}
-				catch(Exception& e)
-				{
-					destroy_areas();
-					throw(e);
-				}
+				start_point.first = (unsigned int)x;
+				start_point.second = (unsigned int)y;
+				start_set = true;
 				break;
 			default:
 				destroy_areas();
