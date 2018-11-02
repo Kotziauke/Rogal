@@ -1,5 +1,7 @@
 #include "Map.h"
-
+/*
+ * Opis metody
+ */
 Map::Map(const char* path)
 {
 	std::ifstream file;
@@ -11,8 +13,8 @@ Map::Map(const char* path)
 	}
 	else
 	{
-		int x;
-		int y;
+		int x = 0;
+		int y; //tu tez
 		int w;
 		int h;
 		bool start_set = false;

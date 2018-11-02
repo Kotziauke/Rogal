@@ -75,8 +75,6 @@ int main()
 		delete map;
 		n++;
 	}
-	quit();
-	return 0;
 }
 
 void init()
@@ -88,6 +86,7 @@ void init()
 	start_color();
 	use_default_colors();
 	curs_set(0);
+	//        v- numery jako enum
 	init_pair(1, COLOR_BLUE, -1); //ściany
 	init_pair(2, COLOR_WHITE, -1); //podłogi
 	init_pair(3, COLOR_CYAN, -1); //ścieżki

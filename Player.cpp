@@ -8,17 +8,19 @@ Player::Player() :
 
 void Player::teleport(Map* map)
 {
+	//rzucac wyjatek
+	//pragma line/debug
 	x = map->get_start_point().first;
 	y = map->get_start_point().second;
 }
 
 void Player::walk(Map* map, int sx, int sy)
 {
-	if(map->is_walkable(x + sx, y + sy))
+	if(map->is_walkable(x + sx, y + sy) == true)
 	{
 		x += sx;
 		y += sy;
-		if(map->collect_coin(x, y))
+		if(map->collect_coin(x, y) == true)
 		{
 			amount++;
 		}
@@ -27,6 +29,7 @@ void Player::walk(Map* map, int sx, int sy)
 
 unsigned int Player::get_amount()
 {
+	//jako inline
 	return amount;
 }
 
