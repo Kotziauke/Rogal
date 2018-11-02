@@ -31,7 +31,6 @@ Map::Map(std::string path)
 					h = file.get();
 					if (w == -1 || h == -1)
 					{
-						destroy_areas();
 						throw(ExceptionEndOfFile{ path.c_str() });
 					}
 				case 'C':
@@ -40,12 +39,10 @@ Map::Map(std::string path)
 					y = file.get();
 					if (x == -1 || y == -1)
 					{
-						destroy_areas();
 						throw(ExceptionEndOfFile{ path.c_str() });
 					}
 					break;
 				default:
-					destroy_areas();
 					throw(ExceptionUnknownCharacter{ path.c_str(), (char)ch });
 					break;
 				}
@@ -63,7 +60,6 @@ Map::Map(std::string path)
 				case 'S':
 					if (start_set)
 					{
-						destroy_areas();
 						throw(ExceptionDuplicateStartPoint{ path.c_str() });
 					}
 					if (!is_walkable((unsigned int)x, (unsigned int)y))
@@ -80,14 +76,15 @@ Map::Map(std::string path)
 		catch (Exception& e)
 		{
 			destroy_areas();
+			file.close();
 			throw(e);
 		}
+		file.close();
 		if (!start_set)
 		{
 			destroy_areas();
 			throw(ExceptionNoStartPoint{ path.c_str() });
 		}
-		file.close();
 	}
 }
 
