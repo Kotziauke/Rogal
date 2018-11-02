@@ -1,4 +1,5 @@
 #pragma once
+#include "Enumerations.h"
 #include <ncurses.h>
 
 class Entity

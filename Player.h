@@ -13,7 +13,10 @@ public:
 	Player();
 	void teleport(Map* map);
 	void walk(Map* map, directions direction);
-	unsigned int get_amount();
+	inline unsigned int get_amount()
+	{
+		return amount;
+	}
 	void display() override;
 	~Player() override;
 };

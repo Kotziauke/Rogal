@@ -8,9 +8,9 @@ Coin::Coin(unsigned int x, unsigned int y) :
 void Coin::display()
 {
 	move(y, x);
-	attrset(COLOR_PAIR(5) | A_BOLD);
+	attrset(COLOR_PAIR(color_coin) | A_BOLD);
 	printw("$");
-	attrset(0);
+	attrset(color_default);
 }
 
 Coin::~Coin()

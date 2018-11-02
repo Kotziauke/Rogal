@@ -12,11 +12,11 @@ void Hallway::display()
 		for (unsigned int i = x; i < x + w; i++)
 		{
 			move(j, i);
-			attrset(COLOR_PAIR(3) | A_BOLD);
+			attrset(COLOR_PAIR(color_hallway) | A_BOLD);
 			printw("+");
 		}
 	}
-	attrset(0);
+	attrset(color_default);
 }
 
 Hallway::~Hallway()

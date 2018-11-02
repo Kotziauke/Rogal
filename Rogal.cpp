@@ -47,12 +47,11 @@ void init()
 	start_color();
 	use_default_colors();
 	curs_set(0);
-	//        v- numery jako enum
-	init_pair(1, COLOR_BLUE, -1); //ściany
-	init_pair(2, COLOR_WHITE, -1); //podłogi
-	init_pair(3, COLOR_CYAN, -1); //ścieżki
-	init_pair(4, COLOR_RED, -1); //gracz
-	init_pair(5, COLOR_YELLOW, -1); //pieniądze
+	init_pair(color_wall, COLOR_BLUE, -1);
+	init_pair(color_floor, COLOR_WHITE, -1);
+	init_pair(color_hallway, COLOR_CYAN, -1);
+	init_pair(color_coin, COLOR_YELLOW, -1);
+	init_pair(color_player, COLOR_RED, -1);
 }
 
 bool play_level(std::string path, Player& player)

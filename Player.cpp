@@ -44,18 +44,12 @@ void Player::walk(Map* map, directions direction)
 	}
 }
 
-unsigned int Player::get_amount()
-{
-	//jako inline
-	return amount;
-}
-
 void Player::display()
 {
 	move(y, x);
-	attrset(COLOR_PAIR(4) | A_BOLD);
+	attrset(COLOR_PAIR(color_player) | A_BOLD);
 	printw("@");
-	attrset(0);
+	attrset(color_default);
 }
 
 Player::~Player()

@@ -12,11 +12,11 @@ void Room::display()
 		for (unsigned int i = x; i < x + w; i++)
 		{
 			move(j, i);
-			attrset(COLOR_PAIR(2) | A_BOLD);
+			attrset(COLOR_PAIR(color_floor) | A_BOLD);
 			printw(".");
 		}
 		move(j, x - 1);
-		attrset(COLOR_PAIR(1) | A_BOLD);
+		attrset(COLOR_PAIR(color_wall) | A_BOLD);
 		printw("#");
 		move(j, x + w);
 		printw("#");
@@ -24,12 +24,12 @@ void Room::display()
 	for (unsigned int i = x - 1; i < x + w + 1; i++)
 	{
 		move(y - 1, i);
-		attrset(COLOR_PAIR(1) | A_BOLD);
+		attrset(COLOR_PAIR(color_wall) | A_BOLD);
 		printw("#");
 		move(y + h, i);
 		printw("#");
 	}
-	attrset(0);
+	attrset(color_default);
 }
 
 Room::~Room()
