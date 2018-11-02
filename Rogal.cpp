@@ -26,8 +26,10 @@ int main()
 	std::ifstream list;
 	std::string path;
 	list.open("List.txt");
+	bool empty = true;
 	while (list >> path)
 	{
+		empty = false;
 		if (play_level(path, player) == false)
 		{
 			break;
@@ -35,7 +37,16 @@ int main()
 	}
 	list.close();
 	quit();
-	return 0;
+	if (empty == true)
+	{
+		std::cout << "\"List.txt\" file does not contain any levels!" << std::endl;
+		return -1;
+	}
+	else
+	{
+		std::cout << "Thanks for playing!" << std::endl;
+		return 0;
+	}
 }
 
 void init()

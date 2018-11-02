@@ -18,7 +18,7 @@ private:
 	std::vector<Coin> coins;
 	void add_area(Area* area);
 	void destroy_areas();
-	void add_coin(unsigned int x, unsigned int y);
+	void add_coin(std::string path, unsigned int x, unsigned int y);
 public:
 	Map(std::string path); //dopisac jakie rzuca wyjatki
 	std::pair<unsigned int, unsigned int> get_start_point();

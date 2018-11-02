@@ -1,69 +1,12 @@
 #include "Exceptions.h"
 
-const char* Exception::what()
-{
-	return err_msg.c_str();
-}
-
-ExceptionBadFile::ExceptionBadFile()
-{
-	err_msg = "Cannot access the file.\n";
-}
-
-ExceptionEndOfFile::ExceptionEndOfFile()
-{
-	err_msg = "Unexpected end of file.\n";
-}
-
-ExceptionUnknownCharacter::ExceptionUnknownCharacter()
-{
-	err_msg = "Unknown character.\n";
-}
-
-ExceptionNoStartPoint::ExceptionNoStartPoint()
-{
-	err_msg = "Start point was not set.\n";
-}
-
-ExceptionDuplicateStartPoint::ExceptionDuplicateStartPoint()
-{
-	err_msg = "Start point was already set in this map.\n";
-}
-
-ExceptionStartPointInVoid::ExceptionStartPointInVoid()
-{
-	err_msg = "Start point is outside a walkable area.\n";
-}
-
-ExceptionWrongDimensions::ExceptionWrongDimensions(unsigned int w, unsigned int h)
-{
-	err_msg = "Area of dimensions ";
-	err_msg += std::to_string((int)w);
-	err_msg += "x";
-	err_msg += std::to_string((int)h);
-	err_msg += " cannot be created.\n";
-}
-
-ExceptionNoCoins::ExceptionNoCoins()
-{
-	err_msg = "Map does not include any coins.\n";
-}
-
-ExceptionInaccessibleCoin::ExceptionInaccessibleCoin(unsigned int x, unsigned int y)
-{
-	err_msg = "Cannot place a coin at position ";
-	err_msg += std::to_string((int)x);
-	err_msg += "x";
-	err_msg += std::to_string((int)y);
-	err_msg += ".\n";
-}
-
-ExceptionDuplicateCoin::ExceptionDuplicateCoin(unsigned int x, unsigned int y)
-{
-	err_msg = "Coin at position ";
-	err_msg += std::to_string((int)x);
-	err_msg += "x";
-	err_msg += std::to_string((int)y);
-	err_msg += " already exists on the map.\n";
-}
-
+char exceptionbadfile[] = "Cannot access the file \"%s\".\n";
+char exceptionendoffile[] = "Unexpected end of file \"%s\".\n";
+char exceptionunknowncharacter[] = "Unknown character \"%c\" while parsing file \"%s\".\n";
+char exceptionnostartpoint[] = "Start point was not set in file \"%s\".\n";
+char exceptionduplicatestartpoint[] = "Start point was already set in file \"%s\".\n";
+char exceptionstartpointinvoid[] = "Start point in file \"%s\" is outside a walkable area.\n";
+char exceptionwrongdimensions[] = "Area of dimensions %dx%d cannot be created.\n";
+char exceptionnocoins[] = "File \"%s\" does not include any coins.\n";
+char exceptioninaccessiblecoin[] = "Cannot place a coin at position %dx%d from file \"%s\".\n";
+char exceptionduplicatecoin[] = "Coin at position %dx%d from file \"%s\" already exists on the map.\n";

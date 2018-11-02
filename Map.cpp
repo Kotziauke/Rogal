@@ -9,7 +9,7 @@ Map::Map(std::string path)
 	if (file.fail())
 	{
 		file.close();
-		throw(ExceptionBadFile{});
+		throw(ExceptionBadFile{ path.c_str() });
 	}
 	else
 	{
@@ -19,36 +19,36 @@ Map::Map(std::string path)
 		int h = 0;
 		bool start_set = false;
 		int ch = -1;
-		while ((ch = file.get()) != -1)
+		try
 		{
-			switch (ch)
+			while ((ch = file.get()) != -1)
 			{
-			case 'R':
-			case 'H':
-				w = file.get();
-				h = file.get();
-				if (w == -1 || h == -1)
+				switch (ch)
 				{
+				case 'R':
+				case 'H':
+					w = file.get();
+					h = file.get();
+					if (w == -1 || h == -1)
+					{
+						destroy_areas();
+						throw(ExceptionEndOfFile{ path.c_str() });
+					}
+				case 'C':
+				case 'S':
+					x = file.get();
+					y = file.get();
+					if (x == -1 || y == -1)
+					{
+						destroy_areas();
+						throw(ExceptionEndOfFile{ path.c_str() });
+					}
+					break;
+				default:
 					destroy_areas();
-					throw(ExceptionEndOfFile{});
+					throw(ExceptionUnknownCharacter{ path.c_str(), (char)ch });
+					break;
 				}
-			case 'C':
-			case 'S':
-				x = file.get();
-				y = file.get();
-				if (x == -1 || y == -1)
-				{
-					destroy_areas();
-					throw(ExceptionEndOfFile{});
-				}
-				break;
-			default:
-				destroy_areas();
-				throw(ExceptionUnknownCharacter{});
-				break;
-			}
-			try
-			{
 				switch (ch)
 				{
 				case 'R':
@@ -58,17 +58,17 @@ Map::Map(std::string path)
 					add_area(new Hallway{ (unsigned int)x, (unsigned int)y, (unsigned int)w, (unsigned int)h });
 					break;
 				case 'C':
-					add_coin((unsigned int)x, (unsigned int)y);
+					add_coin(path, (unsigned int)x, (unsigned int)y);
 					break;
 				case 'S':
-					if (!is_walkable((unsigned int)x, (unsigned int)y))
-					{
-						throw(ExceptionStartPointInVoid{});
-					}
 					if (start_set)
 					{
 						destroy_areas();
-						throw(ExceptionDuplicateStartPoint{});
+						throw(ExceptionDuplicateStartPoint{ path.c_str() });
+					}
+					if (!is_walkable((unsigned int)x, (unsigned int)y))
+					{
+						throw(ExceptionStartPointInVoid{ path.c_str() });
 					}
 					start_point.first = (unsigned int)x;
 					start_point.second = (unsigned int)y;
@@ -76,16 +76,16 @@ Map::Map(std::string path)
 					break;
 				}
 			}
-			catch (Exception& e)
-			{
-				destroy_areas();
-				throw(e);
-			}
+		}
+		catch (Exception& e)
+		{
+			destroy_areas();
+			throw(e);
 		}
 		if (!start_set)
 		{
 			destroy_areas();
-			throw(ExceptionNoStartPoint{});
+			throw(ExceptionNoStartPoint{ path.c_str() });
 		}
 		file.close();
 	}
@@ -105,17 +105,17 @@ void Map::destroy_areas()
 	areas.clear();
 }
 
-void Map::add_coin(unsigned int x, unsigned int y)
+void Map::add_coin(std::string path, unsigned int x, unsigned int y)
 {
 	if (!is_walkable(x, y))
 	{
-		throw(ExceptionInaccessibleCoin{ x, y });
+		throw(ExceptionInaccessibleCoin{ path.c_str(), x, y });
 	}
 	for (unsigned int i = 0; i < coins.size(); i++)
 	{
 		if (coins[i].is_this_you(x, y))
 		{
-			throw(ExceptionDuplicateCoin{ x, y });
+			throw(ExceptionDuplicateCoin{ path.c_str(), x, y });
 		}
 	}
 	coins.push_back({ x, y });
