@@ -20,7 +20,7 @@ private:
 	void destroy_areas();
 	void add_coin(unsigned int x, unsigned int y);
 public:
-	Map(const char* path); //dopisac jakie rzuca wyjatki
+	Map(std::string path); //dopisac jakie rzuca wyjatki
 	std::pair<unsigned int, unsigned int> get_start_point();
 	bool is_walkable(unsigned int tx, unsigned int ty);
 	bool collect_coin(unsigned int tx, unsigned int ty);
