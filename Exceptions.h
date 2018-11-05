@@ -2,20 +2,7 @@
 #include <string>
 #include <exception>
 #include <stdio.h>
-
-extern char exceptionbadfile[];
-extern char exceptionbadheader[];
-extern char exceptionendoffile[];
-extern char exceptionunknowncharacter[];
-extern char exceptionnostartpoint[];
-extern char exceptionduplicatestartpoint[];
-extern char exceptionstartpointinvoid[];
-extern char exceptionwrongcoordinates[];
-extern char exceptionwrongdimensions[];
-extern char exceptionnocoins[];
-extern char exceptioninaccessiblecoin[];
-extern char exceptionduplicatecoin[];
-extern char exceptioncoindoesnotexists[];
+#include "Constants.h"
 
 class Exception :
 	public std::exception
@@ -33,9 +20,29 @@ class ExceptionBadFile :
 	public Exception
 {
 public:
-	ExceptionBadFile(const char* path)
+	ExceptionBadFile()
 	{
-		sprintf(err_msg, exceptionbadfile, path);
+		sprintf(err_msg, exceptionbadfile);
+	}
+};
+
+class ExceptionBadLevelList :
+	public Exception
+{
+public:
+	ExceptionBadLevelList()
+	{
+		sprintf(err_msg, exceptionbadlevellist);
+	}
+};
+
+class ExceptionEmptyLevelList :
+	public Exception
+{
+public:
+	ExceptionEmptyLevelList()
+	{
+		sprintf(err_msg, exceptionemptylevellist);
 	}
 };
 
@@ -49,23 +56,13 @@ public:
 	}
 };
 
-class ExceptionEndOfFile :
-	public Exception
-{
-public:
-	ExceptionEndOfFile(const char* path)
-	{
-		sprintf(err_msg, exceptionendoffile, path);
-	}
-};
-
 class ExceptionUnknownCharacter :
 	public Exception
 {
 public:
-	ExceptionUnknownCharacter(const char* path, char ch)
+	ExceptionUnknownCharacter()
 	{
-		sprintf(err_msg, exceptionunknowncharacter, ch, path);
+		sprintf(err_msg, exceptionunknowncharacter);
 	}
 };
 
@@ -73,9 +70,9 @@ class ExceptionNoStartPoint :
 	public Exception
 {
 public:
-	ExceptionNoStartPoint(const char* path)
+	ExceptionNoStartPoint()
 	{
-		sprintf(err_msg, exceptionnostartpoint, path);
+		sprintf(err_msg, exceptionnostartpoint);
 	}
 };
 
@@ -93,9 +90,9 @@ class ExceptionStartPointInVoid :
 	public Exception
 {
 public:
-	ExceptionStartPointInVoid(const char* path)
+	ExceptionStartPointInVoid()
 	{
-		sprintf(err_msg, exceptionstartpointinvoid, path);
+		sprintf(err_msg, exceptionstartpointinvoid);
 	}
 };
 
@@ -123,9 +120,9 @@ class ExceptionNoCoins :
 	public Exception
 {
 public:
-	ExceptionNoCoins(const char* path)
+	ExceptionNoCoins()
 	{
-		sprintf(err_msg, exceptionnocoins, path);
+		sprintf(err_msg, exceptionnocoins);
 	}
 };
 

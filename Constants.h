@@ -1,9 +1,31 @@
 #pragma once
 
-enum directions { direction_left = 1, direction_right = 2, direction_up = 3, direction_down = 4 };
-enum colors { color_default = 0, color_wall = 1, color_floor = 2, color_hallway = 3, color_coin = 4, color_player = 5 };
-const char tilewall = '#';
-const char tilefloor = '.';
-const char tilehallway = '+';
-const char tilecoin = '$';
-const char tileplayer = '@';
+extern char tilewall;
+extern char tilefloor;
+extern char tilehallway;
+extern char tilecoin;
+extern char tileplayer;
+
+extern char statusbar[];
+
+extern char menulogo[];
+extern char menutext[];
+extern char menuwin[];
+
+extern char errorbadlevellist[];
+extern char errorbadmap[];
+
+extern char exceptionbadfile[];
+extern char exceptionbadlevellist[];
+extern char exceptionemptylevellist[];
+extern char exceptionbadheader[];
+extern char exceptionunknowncharacter[];
+extern char exceptionnostartpoint[];
+extern char exceptionduplicatestartpoint[];
+extern char exceptionstartpointinvoid[];
+extern char exceptionwrongcoordinates[];
+extern char exceptionwrongdimensions[];
+extern char exceptionnocoins[];
+extern char exceptioninaccessiblecoin[];
+extern char exceptionduplicatecoin[];
+extern char exceptioncoindoesnotexists[];

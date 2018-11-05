@@ -1,5 +1,6 @@
 #pragma once
 #include <ncurses.h>
+#include "Enumerations.h"
 #include "Constants.h"
 #include "Exceptions.h"
 

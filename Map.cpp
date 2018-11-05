@@ -9,7 +9,7 @@ Map::Map(std::string path)
 	if (file.fail())
 	{
 		file.close();
-		throw(ExceptionBadFile{ path.c_str() });
+		throw(ExceptionBadFile{});
 	}
 	else
 	{

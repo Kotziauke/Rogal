@@ -14,24 +14,48 @@
 #include "Exceptions.h"
 
 void init();
-bool play_level(std::string path, Player& player);
+bool loader();
+bool play_level(std::string path, Player* player);
 void quit();
+
+extern char menutext[];
 
 int main()
 {
 	init();
-	Player player;
-	std::ifstream list;
-	std::string path;
-	list.open("List.txt");
-	while (list >> path)
+	char ch;
+	bool loop = true;
+	do
 	{
-		if (play_level(path, player) == false)
+		erase();
+		printw("%s\n%s", menulogo, menutext);
+		ch = getch();
+		switch (ch)
 		{
+		case 'P':
+		case 'p':
+			try
+			{
+				if (loader() == true)
+				{
+					erase();
+					printw("%s\n%s", menulogo, menuwin);
+					getch();
+				}
+			}
+			catch (Exception& e)
+			{
+				erase();
+				printw(errorbadlevellist, e.what());
+				getch();
+			}
+			break;
+		case 'Q':
+		case 'q':
+			loop = false;
 			break;
 		}
-	}
-	list.close();
+	} while (loop == true);
 	quit();
 	return 0;
 }
@@ -52,7 +76,42 @@ void init()
 	init_pair(color_player, COLOR_RED, -1);
 }
 
-bool play_level(std::string path, Player& player)
+bool loader()
+{
+	Player* player = new Player{};
+	std::ifstream list;
+	std::string path;
+	bool empty = true;
+	bool completed = true;
+	list.open("List.txt");
+	if (list.fail())
+	{
+		list.close();
+		delete player;
+		throw(ExceptionBadLevelList{});
+	}
+	else
+	{
+		while (list >> path)
+		{
+			empty = false;
+			if (play_level(path, player) == false)
+			{
+				completed = false;
+				break;
+			}
+		}
+		list.close();
+		if (empty == true)
+		{
+			throw(ExceptionEmptyLevelList{});
+		}
+	}
+	delete player;
+	return completed;
+}
+
+bool play_level(std::string path, Player* player)
 {
 	Map* map;
 	try
@@ -62,33 +121,37 @@ bool play_level(std::string path, Player& player)
 	catch (Exception& e)
 	{
 		erase();
-		printw("%s\nPress any key to continue.\n", e.what());
+		printw(errorbadmap, path.c_str(), e.what());
 		getch();
 		return false;
 	}
-	player.teleport(map);
+	player->teleport(map);
 	while (map->remaining_coins() > 0)
 	{
 		erase();
+		printw(statusbar, path.c_str(), map->remaining_coins(), player->get_amount());
 		map->display();
-		move(0, 0);
-		printw("Level \"%s\"\n%d coin(s) left, %d collected so far", path.c_str(), map->remaining_coins(), player.get_amount());
-		player.display();
+		player->display();
 		switch (getch())
 		{
+		case 'A':
 		case 'a':
-			player.walk(map, direction_left);
+			player->walk(map, direction_left);
 			break;
+		case 'D':
 		case 'd':
-			player.walk(map, direction_right);
+			player->walk(map, direction_right);
 			break;
+		case 'W':
 		case 'w':
-			player.walk(map, direction_up);
+			player->walk(map, direction_up);
 			break;
+		case 'S':
 		case 's':
-			player.walk(map, direction_down);
+			player->walk(map, direction_down);
 			break;
-		case 'q':
+		case 'E':
+		case 'e':
 			delete map;
 			return false;
 		}
@@ -101,4 +164,3 @@ void quit()
 {
 	endwin();
 }
-
