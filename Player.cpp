@@ -3,6 +3,7 @@
 Player::Player() :
 	Entity::Entity{ 0, 0 }
 {
+	amount = 0;
 }
 
 void Player::teleport(Map* map)

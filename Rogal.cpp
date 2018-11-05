@@ -20,14 +20,12 @@ void quit() noexcept;
 int main()
 {
 	init();
-	char ch;
 	bool loop = true;
 	do
 	{
 		erase();
 		printw("%s\n%s", menulogo, menutext);
-		ch = getch();
-		switch (ch)
+		switch (getch())
 		{
 		case 'P':
 		case 'p':

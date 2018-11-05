@@ -68,6 +68,14 @@ Map::Map(std::string path)
 					break;
 				}
 			}
+			if (start_set == false)
+			{
+				throw ExceptionNoStartPoint{};
+			}
+			if (remaining_coins() == 0)
+			{
+				throw ExceptionNoCoins{};
+			}
 		}
 		catch (Exception& e)
 		{

@@ -8,7 +8,7 @@ class Player :
 	public Entity
 {
 private:
-	unsigned int amount = 0;
+	unsigned int amount;
 public:
 	Player();
 	void teleport(Map* map);
