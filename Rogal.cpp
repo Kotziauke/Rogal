@@ -9,8 +9,6 @@
 #include <iostream>
 #include <string>
 #include "Constants.h"
-#include "Area.h"
-#include "Coin.h"
 #include "Map.h"
 #include "Player.h"
 #include "Exceptions.h"
@@ -26,10 +24,8 @@ int main()
 	std::ifstream list;
 	std::string path;
 	list.open("List.txt");
-	bool empty = true;
 	while (list >> path)
 	{
-		empty = false;
 		if (play_level(path, player) == false)
 		{
 			break;
@@ -37,16 +33,7 @@ int main()
 	}
 	list.close();
 	quit();
-	if (empty == true)
-	{
-		std::cout << "\"List.txt\" file does not contain any levels!" << std::endl;
-		return -1;
-	}
-	else
-	{
-		std::cout << "Thanks for playing!" << std::endl;
-		return 0;
-	}
+	return 0;
 }
 
 void init()
@@ -75,7 +62,7 @@ bool play_level(std::string path, Player& player)
 	catch (Exception& e)
 	{
 		erase();
-		printw("%s\nPress any key to end.\n", e.what());
+		printw("%s\nPress any key to continue.\n", e.what());
 		getch();
 		return false;
 	}
@@ -85,7 +72,7 @@ bool play_level(std::string path, Player& player)
 		erase();
 		map->display();
 		move(0, 0);
-		printw("Level \"%s\", coins=%d, left=%d", path.c_str(), player.get_amount(), map->remaining_coins());
+		printw("Level \"%s\"\n%d coin(s) left, %d collected so far", path.c_str(), map->remaining_coins(), player.get_amount());
 		player.display();
 		switch (getch())
 		{

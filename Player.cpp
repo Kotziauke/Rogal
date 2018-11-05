@@ -36,9 +36,14 @@ void Player::walk(Map* map, directions direction)
 	{
 		x += sx;
 		y += sy;
-		if (map->destroy_coin(x, y) == true)
+		amount++;
+		try
 		{
-			amount++;
+			map->destroy_coin(x, y);
+		}
+		catch (ExceptionCoinDoesNotExists& e)
+		{
+			amount--;
 		}
 	}
 }

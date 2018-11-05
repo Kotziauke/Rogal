@@ -13,8 +13,17 @@ Map::Map(std::string path)
 	}
 	else
 	{
+		char header[4];
+		file.get(header, 4);
+		if (strcmp(header, "MAP") != 0)
+		{
+			file.close();
+			throw(ExceptionBadHeader{});
+		}
 		int x = 0;
 		int y = 0;
+		int w = 0;
+		int h = 0;
 		bool start_set = false;
 		int ch = -1;
 		try
@@ -24,13 +33,23 @@ Map::Map(std::string path)
 				switch (ch)
 				{
 				case 'R':
-					add_area(new Room{ file.get(), file.get(), file.get(), file.get() });
+					x = file.get();
+					y = file.get();
+					w = file.get();
+					h = file.get();
+					add_area(new Room{ x, y, w, h });
 					break;
 				case 'H':
-					add_area(new Hallway{ file.get(), file.get(), file.get(), file.get() });
+					x = file.get();
+					y = file.get();
+					w = file.get();
+					h = file.get();
+					add_area(new Hallway{ x, y, w, h });
 					break;
 				case 'C':
-					add_coin(file.get(), file.get());
+					x = file.get();
+					y = file.get();
+					add_coin(x, y);
 					break;
 				case 'S':
 					x = file.get();
@@ -43,8 +62,8 @@ Map::Map(std::string path)
 					{
 						throw(ExceptionDuplicateStartPoint{});
 					}
-					start_point.first = (unsigned int)x;
-					start_point.second = (unsigned int)y;
+					start_point.first = x;
+					start_point.second = y;
 					start_set = true;
 					break;
 				}
@@ -90,25 +109,25 @@ void Map::add_coin(int x, int y)
 	coins.push_back({ x, y });
 }
 
-bool Map::is_walkable(int tx, int ty)
-{
-	for (auto& area : areas)
-	{
-		if (area->is_walkable(tx, ty))
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-bool Map::destroy_coin(int tx, int ty)
+void Map::destroy_coin(int tx, int ty)
 {
 	for (unsigned int i = 0; i < coins.size(); i++)
 	{
 		if (coins[i].is_this_you(tx, ty))
 		{
 			coins.erase(coins.begin() + i);
+			return;
+		}
+	}
+	throw(ExceptionCoinDoesNotExists{ tx, ty });
+}
+
+bool Map::is_walkable(int tx, int ty)
+{
+	for (auto& area : areas)
+	{
+		if (area->is_walkable(tx, ty))
+		{
 			return true;
 		}
 	}

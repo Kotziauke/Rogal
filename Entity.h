@@ -1,7 +1,7 @@
 #pragma once
+#include <ncurses.h>
 #include "Constants.h"
 #include "Exceptions.h"
-#include <ncurses.h>
 
 class Entity
 {

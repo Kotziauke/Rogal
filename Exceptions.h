@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 extern char exceptionbadfile[];
+extern char exceptionbadheader[];
 extern char exceptionendoffile[];
 extern char exceptionunknowncharacter[];
 extern char exceptionnostartpoint[];
@@ -14,6 +15,7 @@ extern char exceptionwrongdimensions[];
 extern char exceptionnocoins[];
 extern char exceptioninaccessiblecoin[];
 extern char exceptionduplicatecoin[];
+extern char exceptioncoindoesnotexists[];
 
 class Exception :
 	public std::exception
@@ -34,6 +36,16 @@ public:
 	ExceptionBadFile(const char* path)
 	{
 		sprintf(err_msg, exceptionbadfile, path);
+	}
+};
+
+class ExceptionBadHeader :
+	public Exception
+{
+public:
+	ExceptionBadHeader()
+	{
+		sprintf(err_msg, exceptionbadheader);
 	}
 };
 
@@ -134,5 +146,15 @@ public:
 	ExceptionDuplicateCoin(int x, int y)
 	{
 		sprintf(err_msg, exceptionduplicatecoin, x, y);
+	}
+};
+
+class ExceptionCoinDoesNotExists :
+	public Exception
+{
+public:
+	ExceptionCoinDoesNotExists(int x, int y)
+	{
+		sprintf(err_msg, exceptioncoindoesnotexists, x, y);
 	}
 };

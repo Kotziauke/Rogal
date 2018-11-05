@@ -1,13 +1,14 @@
 #pragma once
+#include <iostream>
+#include <fstream>
+#include <utility>
+#include <vector>
+#include <string>
+#include <string.h>
 #include "Area.h"
 #include "Room.h"
 #include "Hallway.h"
 #include "Coin.h"
-#include <vector>
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <utility>
 #include "Exceptions.h"
 
 class Map
@@ -25,8 +26,8 @@ public:
 	{
 		return start_point;
 	}
+	void destroy_coin(int tx, int ty);
 	bool is_walkable(int tx, int ty);
-	bool destroy_coin(int tx, int ty);
 	inline int remaining_coins()
 	{
 		return coins.size();

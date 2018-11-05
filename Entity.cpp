@@ -5,14 +5,14 @@ Entity::Entity(int x, int y)
 	set_coordinates(x, y);
 }
 
-void Entity::set_coordinates(int x, int y)
+void Entity::set_coordinates(int sx, int sy)
 {
-	if (x < 0 || y < 0)
+	if (sx < 0 || sy < 0)
 	{
-		throw(ExceptionWrongCoordinates{ x, y });
+		throw(ExceptionWrongCoordinates{ sx, sy });
 	}
-	this->x = x;
-	this->y = y;
+	x = sx;
+	y = sy;
 }
 
 bool Entity::is_this_you(int tx, int ty)

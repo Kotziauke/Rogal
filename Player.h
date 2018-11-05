@@ -1,8 +1,8 @@
 #pragma once
-#include "Constants.h"
-#include "Entity.h"
-#include "Map.h"
 #include <utility>
+#include "Entity.h"
+#include "Constants.h"
+#include "Map.h"
 
 class Player :
 	public Entity
