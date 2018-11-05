@@ -9,11 +9,11 @@ void Area::set_dimensions(int x, int y, int w, int h)
 {
 	if (x < 0 || y < 0)
 	{
-		throw(ExceptionWrongCoordinates{ x, y });
+		throw ExceptionWrongCoordinates{ x, y };
 	}
 	if (w <= 0 || h <= 0)
 	{
-		throw(ExceptionWrongDimensions{ w, h });
+		throw ExceptionWrongDimensions{ w, h };
 	}
 	this->x = x;
 	this->y = y;

@@ -2,23 +2,21 @@
 	Maciej Gabryś
 	gm41357, gr. 211a
 
-	02.11.2018
+	05.11.2018
 */
 
 #include <ncurses.h>
 #include <iostream>
 #include <string>
 #include "Constants.h"
+#include "Exceptions.h"
 #include "Map.h"
 #include "Player.h"
-#include "Exceptions.h"
 
 void init();
-bool loader();
+bool level_loader();
 bool play_level(std::string path, Player* player);
 void quit();
-
-extern char menutext[];
 
 int main()
 {
@@ -36,7 +34,7 @@ int main()
 		case 'p':
 			try
 			{
-				if (loader() == true)
+				if (level_loader() == true)
 				{
 					erase();
 					printw("%s\n%s", menulogo, menuwin);
@@ -76,7 +74,7 @@ void init()
 	init_pair(color_player, COLOR_RED, -1);
 }
 
-bool loader()
+bool level_loader()
 {
 	Player* player = new Player{};
 	std::ifstream list;
@@ -88,7 +86,7 @@ bool loader()
 	{
 		list.close();
 		delete player;
-		throw(ExceptionBadLevelList{});
+		throw ExceptionBadLevelList{};
 	}
 	else
 	{
@@ -104,7 +102,7 @@ bool loader()
 		list.close();
 		if (empty == true)
 		{
-			throw(ExceptionEmptyLevelList{});
+			throw ExceptionEmptyLevelList{};
 		}
 	}
 	delete player;

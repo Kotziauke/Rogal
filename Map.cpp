@@ -9,7 +9,7 @@ Map::Map(std::string path)
 	if (file.fail())
 	{
 		file.close();
-		throw(ExceptionBadFile{});
+		throw ExceptionBadFile{};
 	}
 	else
 	{
@@ -18,7 +18,7 @@ Map::Map(std::string path)
 		if (strcmp(header, "MAP") != 0)
 		{
 			file.close();
-			throw(ExceptionBadHeader{});
+			throw ExceptionBadHeader{};
 		}
 		int x = 0;
 		int y = 0;
@@ -56,11 +56,11 @@ Map::Map(std::string path)
 					y = file.get();
 					if (x < 0 || y < 0)
 					{
-						throw(ExceptionWrongCoordinates{ x, y });
+						throw ExceptionWrongCoordinates{ x, y };
 					}
 					if (start_set == true)
 					{
-						throw(ExceptionDuplicateStartPoint{});
+						throw ExceptionDuplicateStartPoint{};
 					}
 					start_point.first = x;
 					start_point.second = y;
@@ -73,7 +73,7 @@ Map::Map(std::string path)
 		{
 			destroy_areas();
 			file.close();
-			throw(e);
+			throw e;
 		}
 		file.close();
 	}
@@ -97,13 +97,13 @@ void Map::add_coin(int x, int y)
 {
 	if (!is_walkable(x, y))
 	{
-		throw(ExceptionInaccessibleCoin{ x, y });
+		throw ExceptionInaccessibleCoin{ x, y };
 	}
 	for (unsigned int i = 0; i < coins.size(); i++)
 	{
 		if (coins[i].is_this_you(x, y))
 		{
-			throw(ExceptionDuplicateCoin{ x, y });
+			throw ExceptionDuplicateCoin{ x, y };
 		}
 	}
 	coins.push_back({ x, y });
@@ -119,7 +119,7 @@ void Map::destroy_coin(int tx, int ty)
 			return;
 		}
 	}
-	throw(ExceptionCoinDoesNotExists{ tx, ty });
+	throw ExceptionCoinDoesNotExists{ tx, ty };
 }
 
 bool Map::is_walkable(int tx, int ty)

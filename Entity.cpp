@@ -9,7 +9,7 @@ void Entity::set_coordinates(int sx, int sy)
 {
 	if (sx < 0 || sy < 0)
 	{
-		throw(ExceptionWrongCoordinates{ sx, sy });
+		throw ExceptionWrongCoordinates{ sx, sy };
 	}
 	x = sx;
 	y = sy;
