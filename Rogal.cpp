@@ -13,8 +13,8 @@
 #include "Player.h"
 
 void init() noexcept;
-bool level_loader();
-bool play_level(std::string path, Player* player) noexcept;
+bool map_loader();
+bool play_map(std::string path, Player* player) noexcept;
 void quit() noexcept;
 
 int main()
@@ -31,7 +31,7 @@ int main()
 		case 'p':
 			try
 			{
-				if (level_loader() == true)
+				if (map_loader() == true)
 				{
 					erase();
 					printw("%s\n%s", menulogo, menuwin);
@@ -41,7 +41,7 @@ int main()
 			catch (Exception& e)
 			{
 				erase();
-				printw(messagebadlevellist, e.what());
+				printw(messagebadlist, e.what());
 				getch();
 			}
 			break;
@@ -71,7 +71,7 @@ void init() noexcept
 	init_pair(color_player, COLOR_RED, -1);
 }
 
-bool level_loader()
+bool map_loader()
 {
 	Player* player = new Player{};
 	std::ifstream list;
@@ -83,14 +83,14 @@ bool level_loader()
 	{
 		list.close();
 		delete player;
-		throw ExceptionBadLevelList{};
+		throw ExceptionBadMapList{};
 	}
 	else
 	{
 		while (list >> path)
 		{
 			empty = false;
-			if (play_level(path, player) == false)
+			if (play_map(path, player) == false)
 			{
 				completed = false;
 				break;
@@ -99,14 +99,14 @@ bool level_loader()
 		list.close();
 		if (empty == true)
 		{
-			throw ExceptionEmptyLevelList{};
+			throw ExceptionEmptyMapList{};
 		}
 	}
 	delete player;
 	return completed;
 }
 
-bool play_level(std::string path, Player* player) noexcept
+bool play_map(std::string path, Player* player) noexcept
 {
 	Map* map;
 	try

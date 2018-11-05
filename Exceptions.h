@@ -25,23 +25,23 @@ public:
 	}
 };
 
-class ExceptionBadLevelList :
+class ExceptionBadMapList :
 	public Exception
 {
 public:
-	ExceptionBadLevelList() noexcept
+	ExceptionBadMapList() noexcept
 	{
-		sprintf(err_msg, exceptionbadlevellist);
+		sprintf(err_msg, exceptionbadmaplist);
 	}
 };
 
-class ExceptionEmptyLevelList :
+class ExceptionEmptyMapList :
 	public Exception
 {
 public:
-	ExceptionEmptyLevelList() noexcept
+	ExceptionEmptyMapList() noexcept
 	{
-		sprintf(err_msg, exceptionemptylevellist);
+		sprintf(err_msg, exceptionemptymaplist);
 	}
 };
 

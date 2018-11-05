@@ -12,12 +12,12 @@ extern char menulogo[];
 extern char menutext[];
 extern char menuwin[];
 
-extern char messagebadlevellist[];
+extern char messagebadlist[];
 extern char messagebadmap[];
 
 extern char exceptionbadfile[];
-extern char exceptionbadlevellist[];
-extern char exceptionemptylevellist[];
+extern char exceptionbadmaplist[];
+extern char exceptionemptymaplist[];
 extern char exceptionbadheader[];
 extern char exceptionunknownidentifier[];
 extern char exceptionnostartpoint[];
