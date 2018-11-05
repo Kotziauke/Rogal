@@ -14,8 +14,8 @@ protected:
 	void set_dimensions(int x, int y, int w, int h);
 public:
 	Area(int x, int y, int w, int h);
-	bool is_walkable(int tx, int ty);
-	virtual void display() = 0;
-	virtual ~Area() = 0;
+	bool is_walkable(int tx, int ty) noexcept;
+	virtual void display() noexcept = 0;
+	virtual ~Area() noexcept = 0;
 };
 

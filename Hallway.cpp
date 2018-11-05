@@ -5,7 +5,7 @@ Hallway::Hallway(int x, int y, int w, int h) :
 {
 }
 
-void Hallway::display()
+void Hallway::display() noexcept
 {
 	for (int j = y; j < y + h; j++)
 	{
@@ -19,7 +19,7 @@ void Hallway::display()
 	attrset(color_default);
 }
 
-Hallway::~Hallway()
+Hallway::~Hallway() noexcept
 {
 }
 

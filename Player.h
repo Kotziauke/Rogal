@@ -12,12 +12,12 @@ private:
 public:
 	Player();
 	void teleport(Map* map);
-	void walk(Map* map, directions direction);
-	inline unsigned int get_amount()
+	void walk(Map* map, directions direction) noexcept;
+	inline unsigned int get_amount() noexcept
 	{
 		return amount;
 	}
-	void display() override;
-	~Player() override;
+	void display() noexcept override;
+	~Player() noexcept override;
 };
 

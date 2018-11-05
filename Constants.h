@@ -12,8 +12,8 @@ extern char menulogo[];
 extern char menutext[];
 extern char menuwin[];
 
-extern char errorbadlevellist[];
-extern char errorbadmap[];
+extern char messagebadlevellist[];
+extern char messagebadmap[];
 
 extern char exceptionbadfile[];
 extern char exceptionbadlevellist[];

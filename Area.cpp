@@ -21,7 +21,7 @@ void Area::set_dimensions(int x, int y, int w, int h)
 	this->h = h;
 }
 
-bool Area::is_walkable(int tx, int ty)
+bool Area::is_walkable(int tx, int ty) noexcept
 {
 	if (tx >= x && tx < x + w && ty >= y && ty < y + h)
 	{
@@ -30,7 +30,7 @@ bool Area::is_walkable(int tx, int ty)
 	return false;
 }
 
-Area::~Area()
+Area::~Area() noexcept
 {
 }
 

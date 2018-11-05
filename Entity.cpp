@@ -15,7 +15,7 @@ void Entity::set_coordinates(int sx, int sy)
 	y = sy;
 }
 
-bool Entity::is_this_you(int tx, int ty)
+bool Entity::is_this_you(int tx, int ty) noexcept
 {
 	if (tx == x && ty == y)
 	{
@@ -24,7 +24,7 @@ bool Entity::is_this_you(int tx, int ty)
 	return false;
 }
 
-Entity::~Entity()
+Entity::~Entity() noexcept
 {
 }
 

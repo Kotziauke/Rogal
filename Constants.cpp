@@ -12,8 +12,8 @@ char menulogo[] = "    ____                    __\n   / __ \\____  ____ _____ _/
 char menutext[] = "The objective of this game is\nto collect every coin on the\nlevel.\n\nUse WASD keys to walk. You can\npress E to exit anytime.\n\nPress P to play or Q to quit.\n";
 char menuwin[] = "Congratulations, you've\ncompleted the game!\n\nPress any key to continue.\n";
 
-char errorbadlevellist[] = "Error while parsing level list:\n%s\nPress any key to continue.\n";
-char errorbadmap[] = "Error while parsing map \"%s\":\n%s\nPress any key to continue.\n";
+char messagebadlevellist[] = "Error while parsing level list:\n%s\nPress any key to continue.\n";
+char messagebadmap[] = "Error while parsing map \"%s\":\n%s\nPress any key to continue.\n";
 
 char exceptionbadfile[] = "Cannot access the file \"%s\"!\n";
 char exceptionbadlevellist[] = "Level list cannot be accessed!\n";

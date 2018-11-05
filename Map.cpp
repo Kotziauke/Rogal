@@ -79,12 +79,12 @@ Map::Map(std::string path)
 	}
 }
 
-void Map::add_area(Area* area)
+void Map::add_area(Area* area) noexcept
 {
 	areas.push_back(area);
 }
 
-void Map::destroy_areas()
+void Map::destroy_areas() noexcept
 {
 	for (auto& area : areas)
 	{
@@ -122,7 +122,7 @@ void Map::destroy_coin(int tx, int ty)
 	throw ExceptionCoinDoesNotExists{ tx, ty };
 }
 
-bool Map::is_walkable(int tx, int ty)
+bool Map::is_walkable(int tx, int ty) noexcept
 {
 	for (auto& area : areas)
 	{
@@ -134,7 +134,7 @@ bool Map::is_walkable(int tx, int ty)
 	return false;
 }
 
-void Map::display()
+void Map::display() noexcept
 {
 	for (auto& area : areas)
 	{
@@ -146,7 +146,7 @@ void Map::display()
 	}
 }
 
-Map::~Map()
+Map::~Map() noexcept
 {
 	destroy_areas();
 }

@@ -6,7 +6,7 @@ class Hallway :
 {
 public:
 	Hallway(int x, int y, int w, int h);
-	void display() override;
-	~Hallway() override;
+	void display() noexcept override;
+	~Hallway() noexcept override;
 };
 

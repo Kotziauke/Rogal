@@ -12,8 +12,8 @@ protected:
 	void set_coordinates(int x, int y);
 public:
 	Entity(int x, int y);
-	bool is_this_you(int tx, int ty);
-	virtual void display() = 0;
-	virtual ~Entity() = 0;
+	bool is_this_you(int tx, int ty) noexcept;
+	virtual void display() noexcept  = 0;
+	virtual ~Entity() noexcept = 0;
 };
 

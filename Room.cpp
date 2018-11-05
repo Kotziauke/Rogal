@@ -5,7 +5,7 @@ Room::Room(int x, int y, int w, int h) :
 {
 }
 
-void Room::display()
+void Room::display() noexcept
 {
 	for (int j = y; j < y + h; j++)
 	{
@@ -32,7 +32,7 @@ void Room::display()
 	attrset(color_default);
 }
 
-Room::~Room()
+Room::~Room() noexcept
 {
 }
 

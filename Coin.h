@@ -6,7 +6,7 @@ class Coin :
 {
 public:
 	Coin(int x, int y);
-	void display() override;
-	~Coin() override;
+	void display() noexcept override;
+	~Coin() noexcept override;
 };
 

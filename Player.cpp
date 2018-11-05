@@ -7,13 +7,17 @@ Player::Player() :
 
 void Player::teleport(Map* map)
 {
-	//rzucac wyjatek
-	//pragma line/debug
-	x = map->get_start_point().first;
-	y = map->get_start_point().second;
+	int sx = map->get_start_point().first;
+	int sy = map->get_start_point().second;
+	if (sx < 0 || sy < 0)
+	{
+		throw ExceptionWrongCoordinates{ sx, sy };
+	}
+	x = sx;
+	y = sy;
 }
 
-void Player::walk(Map* map, directions direction)
+void Player::walk(Map* map, directions direction) noexcept
 {
 	int sx = 0;
 	int sy = 0;
@@ -48,7 +52,7 @@ void Player::walk(Map* map, directions direction)
 	}
 }
 
-void Player::display()
+void Player::display() noexcept
 {
 	move(y, x);
 	attrset(COLOR_PAIR(color_player) | A_BOLD);
@@ -56,7 +60,7 @@ void Player::display()
 	attrset(color_default);
 }
 
-Player::~Player()
+Player::~Player() noexcept
 {
 }
 

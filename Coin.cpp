@@ -5,7 +5,7 @@ Coin::Coin(int x, int y) :
 {
 }
 
-void Coin::display()
+void Coin::display() noexcept
 {
 	move(y, x);
 	attrset(COLOR_PAIR(color_coin) | A_BOLD);
@@ -13,7 +13,7 @@ void Coin::display()
 	attrset(color_default);
 }
 
-Coin::~Coin()
+Coin::~Coin() noexcept
 {
 }
 

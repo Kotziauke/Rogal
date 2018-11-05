@@ -13,10 +13,10 @@
 #include "Map.h"
 #include "Player.h"
 
-void init();
+void init() noexcept;
 bool level_loader();
-bool play_level(std::string path, Player* player);
-void quit();
+bool play_level(std::string path, Player* player) noexcept;
+void quit() noexcept;
 
 int main()
 {
@@ -44,7 +44,7 @@ int main()
 			catch (Exception& e)
 			{
 				erase();
-				printw(errorbadlevellist, e.what());
+				printw(messagebadlevellist, e.what());
 				getch();
 			}
 			break;
@@ -58,7 +58,7 @@ int main()
 	return 0;
 }
 
-void init()
+void init() noexcept
 {
 	initscr();
 	raw();
@@ -109,7 +109,7 @@ bool level_loader()
 	return completed;
 }
 
-bool play_level(std::string path, Player* player)
+bool play_level(std::string path, Player* player) noexcept
 {
 	Map* map;
 	try
@@ -119,7 +119,7 @@ bool play_level(std::string path, Player* player)
 	catch (Exception& e)
 	{
 		erase();
-		printw(errorbadmap, path.c_str(), e.what());
+		printw(messagebadmap, path.c_str(), e.what());
 		getch();
 		return false;
 	}
@@ -158,7 +158,7 @@ bool play_level(std::string path, Player* player)
 	return true;
 }
 
-void quit()
+void quit() noexcept
 {
 	endwin();
 }

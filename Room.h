@@ -6,7 +6,7 @@ class Room :
 {
 public:
 	Room(int x, int y, int w, int h);
-	void display() override;
-	~Room() override;
+	void display() noexcept override;
+	~Room() noexcept override;
 };
 
