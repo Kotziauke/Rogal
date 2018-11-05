@@ -19,7 +19,7 @@ extern char exceptionbadfile[];
 extern char exceptionbadlevellist[];
 extern char exceptionemptylevellist[];
 extern char exceptionbadheader[];
-extern char exceptionunknowncharacter[];
+extern char exceptionunknownidentifier[];
 extern char exceptionnostartpoint[];
 extern char exceptionduplicatestartpoint[];
 extern char exceptionstartpointinvoid[];

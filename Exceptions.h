@@ -55,13 +55,13 @@ public:
 	}
 };
 
-class ExceptionUnknownCharacter :
+class ExceptionUnknownIdentifier :
 	public Exception
 {
 public:
-	ExceptionUnknownCharacter() noexcept
+	ExceptionUnknownIdentifier() noexcept
 	{
-		sprintf(err_msg, exceptionunknowncharacter);
+		sprintf(err_msg, exceptionunknownidentifier);
 	}
 };
 

@@ -66,6 +66,9 @@ Map::Map(std::string path)
 					start_point.second = y;
 					start_set = true;
 					break;
+				default:
+					throw ExceptionUnknownIdentifier{};
+					break;
 				}
 			}
 			if (start_set == false)
