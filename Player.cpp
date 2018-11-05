@@ -1,8 +1,7 @@
 #include "Player.h"
 
 Player::Player() :
-	Entity::Entity{ 0, 0 },
-	amount{ 0 }
+	Entity::Entity{ 0, 0 }
 {
 }
 
@@ -37,7 +36,7 @@ void Player::walk(Map* map, directions direction)
 	{
 		x += sx;
 		y += sy;
-		if (map->collect_coin(x, y) == true)
+		if (map->destroy_coin(x, y) == true)
 		{
 			amount++;
 		}
@@ -48,7 +47,7 @@ void Player::display()
 {
 	move(y, x);
 	attrset(COLOR_PAIR(color_player) | A_BOLD);
-	printw("@");
+	printw("%c", tileplayer);
 	attrset(color_default);
 }
 

@@ -5,7 +5,7 @@ class Coin :
 	public Entity
 {
 public:
-	Coin(unsigned int x, unsigned int y);
+	Coin(int x, int y);
 	void display() override;
 	~Coin() override;
 };

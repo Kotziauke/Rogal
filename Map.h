@@ -13,18 +13,24 @@
 class Map
 {
 private:
-	std::pair<unsigned int, unsigned int> start_point;
+	std::pair<int, int> start_point;
 	std::vector<Area*> areas;
 	std::vector<Coin> coins;
 	void add_area(Area* area);
 	void destroy_areas();
-	void add_coin(std::string path, unsigned int x, unsigned int y);
+	void add_coin(int x, int y);
 public:
 	Map(std::string path); //dopisac jakie rzuca wyjatki
-	std::pair<unsigned int, unsigned int> get_start_point();
-	bool is_walkable(unsigned int tx, unsigned int ty);
-	bool collect_coin(unsigned int tx, unsigned int ty);
-	int remaining_coins();
+	inline std::pair<unsigned int, unsigned int> get_start_point()
+	{
+		return start_point;
+	}
+	bool is_walkable(int tx, int ty);
+	bool destroy_coin(int tx, int ty);
+	inline int remaining_coins()
+	{
+		return coins.size();
+	}
 	void display();
 	~Map();
 };

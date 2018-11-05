@@ -9,6 +9,7 @@ extern char exceptionunknowncharacter[];
 extern char exceptionnostartpoint[];
 extern char exceptionduplicatestartpoint[];
 extern char exceptionstartpointinvoid[];
+extern char exceptionwrongcoordinates[];
 extern char exceptionwrongdimensions[];
 extern char exceptionnocoins[];
 extern char exceptioninaccessiblecoin[];
@@ -70,9 +71,9 @@ class ExceptionDuplicateStartPoint :
 	public Exception
 {
 public:
-	ExceptionDuplicateStartPoint(const char* path)
+	ExceptionDuplicateStartPoint()
 	{
-		sprintf(err_msg, exceptionduplicatestartpoint, path);
+		sprintf(err_msg, exceptionduplicatestartpoint);
 	}
 };
 
@@ -86,11 +87,21 @@ public:
 	}
 };
 
+class ExceptionWrongCoordinates :
+	public Exception
+{
+public:
+	ExceptionWrongCoordinates(int x, int y)
+	{
+		sprintf(err_msg, exceptionwrongcoordinates, x, y);
+	}
+};
+
 class ExceptionWrongDimensions :
 	public Exception
 {
 public:
-	ExceptionWrongDimensions(unsigned int w, unsigned int h)
+	ExceptionWrongDimensions(int w, int h)
 	{
 		sprintf(err_msg, exceptionwrongdimensions, w, h);
 	}
@@ -110,9 +121,9 @@ class ExceptionInaccessibleCoin :
 	public Exception
 {
 public:
-	ExceptionInaccessibleCoin(const char* path, unsigned int x, unsigned int y)
+	ExceptionInaccessibleCoin(int x, int y)
 	{
-		sprintf(err_msg, exceptioninaccessiblecoin, x, y, path);
+		sprintf(err_msg, exceptioninaccessiblecoin, x, y);
 	}
 };
 
@@ -120,8 +131,8 @@ class ExceptionDuplicateCoin :
 	public Exception
 {
 public:
-	ExceptionDuplicateCoin(const char* path, unsigned int x, unsigned int y)
+	ExceptionDuplicateCoin(int x, int y)
 	{
-		sprintf(err_msg, exceptionduplicatecoin, x, y, path);
+		sprintf(err_msg, exceptionduplicatecoin, x, y);
 	}
 };

@@ -8,7 +8,7 @@
 #include <ncurses.h>
 #include <iostream>
 #include <string>
-#include "Enumerations.h"
+#include "Constants.h"
 #include "Area.h"
 #include "Coin.h"
 #include "Map.h"
@@ -75,7 +75,7 @@ bool play_level(std::string path, Player& player)
 	catch (Exception& e)
 	{
 		erase();
-		printw("%s", e.what());
+		printw("%s\nPress any key to end.\n", e.what());
 		getch();
 		return false;
 	}

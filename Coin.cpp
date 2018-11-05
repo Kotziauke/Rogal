@@ -1,6 +1,6 @@
 #include "Coin.h"
 
-Coin::Coin(unsigned int x, unsigned int y) :
+Coin::Coin(int x, int y) :
 	Entity::Entity{ x, y }
 {
 }
@@ -9,7 +9,7 @@ void Coin::display()
 {
 	move(y, x);
 	attrset(COLOR_PAIR(color_coin) | A_BOLD);
-	printw("$");
+	printw("%c", tilecoin);
 	attrset(color_default);
 }
 

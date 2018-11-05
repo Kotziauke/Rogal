@@ -1,15 +1,17 @@
 #pragma once
-#include "Enumerations.h"
+#include "Constants.h"
+#include "Exceptions.h"
 #include <ncurses.h>
 
 class Entity
 {
 protected:
-	unsigned int x;
-	unsigned int y;
+	int x;
+	int y;
+	void set_coordinates(int x, int y);
 public:
-	Entity(unsigned int x, unsigned int y);
-	bool is_this_you(unsigned int tx, unsigned int ty);
+	Entity(int x, int y);
+	bool is_this_you(int tx, int ty);
 	virtual void display() = 0;
 	virtual ~Entity() = 0;
 };

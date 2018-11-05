@@ -1,33 +1,33 @@
 #include "Room.h"
 
-Room::Room(unsigned int x, unsigned int y, unsigned int w, unsigned int h) :
+Room::Room(int x, int y, int w, int h) :
 	Area::Area{ x, y, w, h }
 {
 }
 
 void Room::display()
 {
-	for (unsigned int j = y; j < y + h; j++)
+	for (int j = y; j < y + h; j++)
 	{
-		for (unsigned int i = x; i < x + w; i++)
+		for (int i = x; i < x + w; i++)
 		{
 			move(j, i);
 			attrset(COLOR_PAIR(color_floor) | A_BOLD);
-			printw(".");
+			printw("%c", tilefloor);
 		}
 		move(j, x - 1);
 		attrset(COLOR_PAIR(color_wall) | A_BOLD);
-		printw("#");
+		printw("%c", tilewall);
 		move(j, x + w);
-		printw("#");
+		printw("%c", tilewall);
 	}
-	for (unsigned int i = x - 1; i < x + w + 1; i++)
+	for (int i = x - 1; i < x + w + 1; i++)
 	{
 		move(y - 1, i);
 		attrset(COLOR_PAIR(color_wall) | A_BOLD);
-		printw("#");
+		printw("%c", tilewall);
 		move(y + h, i);
-		printw("#");
+		printw("%c", tilewall);
 	}
 	attrset(color_default);
 }

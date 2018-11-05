@@ -1,5 +1,5 @@
 #pragma once
-#include "Enumerations.h"
+#include "Constants.h"
 #include "Entity.h"
 #include "Map.h"
 #include <utility>
@@ -8,7 +8,7 @@ class Player :
 	public Entity
 {
 private:
-	unsigned int amount;
+	unsigned int amount = 0;
 public:
 	Player();
 	void teleport(Map* map);
