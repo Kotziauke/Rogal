@@ -9,7 +9,7 @@ char tileplayer = '@';
 char statusbar[] = "Level \"%s\":\n%d coin(s) left, %d collected so far.";
 
 char menulogo[] = "    ____                    __\n   / __ \\____  ____ _____ _/ /\n  / /_/ / __ \\/ __ `/ __ `/ /\n / _, _/ /_/ / /_/ / /_/ / /\n/_/ |_|\\____/\\__, /\\__,_/_/\n            /____/    Ver. 1.0\n";
-char menutext[] = "The objective of this game is\nto collect every coin on the\nlevel.\n\nUse WASD keys to walk. You can\npress E to exit anytime.\n\nPress P to play or Q to quit.\n";
+char menutext[] = "The objective of this game is\nto collect all coins from the\nlevel.\n\nUse WASD keys to walk. You can\npress E to exit anytime.\n\nPress P to play or Q to quit.\n";
 char menuwin[] = "Congratulations, you've\ncompleted the game!\n\nPress any key to continue.\n";
 
 char messagebadlevellist[] = "Error while parsing level list:\n%s\nPress any key to continue.\n";

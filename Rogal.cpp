@@ -1,12 +1,11 @@
 /*
 	Maciej Gabryś
-	gm41357, gr. 211a
+	nr 41357, gr. 211a
 
 	05.11.2018
 */
 
 #include <ncurses.h>
-#include <iostream>
 #include <string>
 #include "Constants.h"
 #include "Exceptions.h"
