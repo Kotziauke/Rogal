@@ -13,9 +13,9 @@ Map::Map(std::string path)
 	}
 	else
 	{
-		char header[4];
-		file.get(header, 4);
-		if (strcmp(header, "MAP") != 0)
+		char header[5];
+		file.get(header, 5);
+		if (strcmp(header, "MAP\x01") != 0)
 		{
 			file.close();
 			throw ExceptionBadHeader{};
@@ -62,6 +62,10 @@ Map::Map(std::string path)
 					{
 						throw ExceptionDuplicateStartPoint{};
 					}
+					if (is_walkable(x, y) == false)
+					{
+						throw ExceptionStartPointInVoid{};
+					}
 					start_point.first = x;
 					start_point.second = y;
 					start_set = true;
@@ -106,7 +110,7 @@ void Map::destroy_areas() noexcept
 
 void Map::add_coin(int x, int y)
 {
-	if (!is_walkable(x, y))
+	if (is_walkable(x, y) == false)
 	{
 		throw ExceptionInaccessibleCoin{ x, y };
 	}

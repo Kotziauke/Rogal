@@ -1,0 +1,99 @@
+    ____                    __
+   / __ \____  ____ _____ _/ /
+  / /_/ / __ \/ __ `/ __ `/ /
+ / _, _/ /_/ / /_/ / /_/ / /
+/_/ |_|\____/\__, /\__,_/_/
+            /____/ Instruction
+
+
+
+# About the game
+
+  Rogal is a simple game focused around exploring and collecting.
+  
+  On your play, you will deal with labirynth-like mazes where the
+  objective is to collect every single coin in order to proceed to
+  the next level.
+  
+  The game ends, when you clear all the stages...
+  
+  ...But worry not! You can create your own maps and share them with
+  others to extend your playthrough.
+
+
+
+# Controls
+
+  In main menu, press P to start the game or Q to quit to the shell.
+  
+  In game, use WASD keys to walk. Pressing E will exit current level
+  and send you back to the main menu.
+
+
+
+# Map list
+
+  Map list is a text file that contains a map sequence, it must be
+  called "List.txt" and placed in the same directory as the game
+  binary.
+  
+  This file must contain relative paths to map files, written in
+  separate lines. At least one map is required for the game to accept
+  such a list.
+
+
+
+# Map format
+
+  Maps are binary files, they contain a header and level data.
+
+
+  * Header
+
+    Header contains a four byte signature, noted in hexadecimal as:
+    4D 41 50 01 (which stands for an ASCII string "MAP" followed by
+    a format version).
+
+
+  * Level data
+
+    Level data is a sequence of map elements. Every element starts
+    with an identifier followed by two or four bytes of information,
+    depending on the element type:
+
+    - Room:
+      Offset: Length: Description:
+      0       1       ASCII letter 'R'.
+      1       1       X position of the room.
+      2       1       Y position of the room.
+      3       1       Width of the room.
+      4       1       Height of the room.
+      Note: Width and height of the room must be greater than zero.
+
+    - Hallway:
+      Offset: Length: Description:
+      0       1       ASCII letter 'H'.
+      1       1       X position of the hallway.
+      2       1       Y position of the hallway.
+      3       1       Width of the hallway.
+      4       1       Height of the hallway.
+      Note: Width and height of the hallway must be greater than zero.
+
+    - Coin:
+      Offset: Length: Description:
+      0       1       ASCII letter 'C'.
+      1       1       X position of the coin.
+      2       1       Y position of the coin.
+      Note: Map must include at least one coin. Coins must be placed
+      inside a walkable areas. Two coins cannot be placed in the same
+      spot.
+
+    - Start point:
+      Offset: Length: Description:
+      0       1       ASCII letter 'S'.
+      1       1       X position of the start point.
+      2       1       Y position of the start point.
+      Note: Map must include exactly one start point which must be
+      placed inside a walkable area.
+
+

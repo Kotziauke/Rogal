@@ -3,7 +3,7 @@
 char tilewall = '#';
 char tilefloor = '.';
 char tilehallway = '+';
-char tilecoin = '$';
+char tilecoin = 'o';
 char tileplayer = '@';
 
 char statusbar[] = "Map \"%s\":\n%d coin(s) left, %d collected so far.";

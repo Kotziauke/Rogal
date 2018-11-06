@@ -1,3 +1,5 @@
 first steps.map
 bridge.map
+slalom.map
 honeycomb.map
+robbery.map
