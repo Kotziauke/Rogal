@@ -1,7 +1,5 @@
 #include "Map.h"
-/*
- * Opis metody
- */
+
 Map::Map(std::string path)
 {
 	std::ifstream file;

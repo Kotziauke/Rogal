@@ -8,7 +8,7 @@ char tileplayer = '@';
 
 char statusbar[] = "Map \"%s\":\n%d coin(s) left, %d collected so far.";
 
-char menulogo[] = "    ____                    __\n   / __ \\____  ____ _____ _/ /\n  / /_/ / __ \\/ __ `/ __ `/ /\n / _, _/ /_/ / /_/ / /_/ / /\n/_/ |_|\\____/\\__, /\\__,_/_/\n            /____/    Ver. 1.0\n";
+char menulogo[] = "    ____                    __\n   / __ \\____  ____ _____ _/ /\n  / /_/ / __ \\/ __ `/ __ `/ /\n / _, _/ /_/ / /_/ / /_/ / /\n/_/ |_|\\____/\\__, /\\__,_/_/\n            /____/    Ver. 1.2\n";
 char menutext[] = "The objective of this game is\nto collect all coins from the\nmap.\n\nUse WASD keys to walk. You can\npress E to exit anytime.\n\nPress P to play or Q to quit.\n";
 char menuwin[] = "Congratulations, you've\ncompleted the game!\n\nPress any key to continue.\n";
 

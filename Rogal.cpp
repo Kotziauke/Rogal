@@ -2,7 +2,7 @@
 	Maciej Gabryś
 	nr 41357, gr. 211a
 
-	05.11.2018
+	06.11.2018
 */
 
 #include <ncurses.h>
@@ -12,14 +12,14 @@
 #include "Map.h"
 #include "Player.h"
 
-void init() noexcept;
+void ncurses_init() noexcept;
 bool map_loader();
 bool play_map(std::string path, Player* player) noexcept;
-void quit() noexcept;
+void ncurses_quit() noexcept;
 
 int main()
 {
-	init();
+	ncurses_init();
 	bool loop = true;
 	do
 	{
@@ -51,11 +51,11 @@ int main()
 			break;
 		}
 	} while (loop == true);
-	quit();
+	ncurses_quit();
 	return 0;
 }
 
-void init() noexcept
+void ncurses_init() noexcept
 {
 	initscr();
 	raw();
@@ -155,7 +155,7 @@ bool play_map(std::string path, Player* player) noexcept
 	return true;
 }
 
-void quit() noexcept
+void ncurses_quit() noexcept
 {
 	endwin();
 }
