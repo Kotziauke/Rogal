@@ -87,7 +87,7 @@ bool map_loader()
 	}
 	else
 	{
-		while (list >> path)
+		while (std::getline(list, path))
 		{
 			empty = false;
 			if (play_map(path, player) == false)
